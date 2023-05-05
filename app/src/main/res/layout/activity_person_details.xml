@@ -34,6 +34,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
+
                 android:id="@+id/DName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,6 +72,7 @@
 
             <TextView
                 android:id="@+id/DFacebook"
+                android:textColor="@color/purple_700"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"

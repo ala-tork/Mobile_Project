@@ -91,8 +91,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                     String x=phonenumber.getText().toString().trim();
                     Toast.makeText(activity, x+"", Toast.LENGTH_SHORT).show();
                     Intent makecall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+Uri.encode(x)));
-
-
                     activity.startActivity(makecall);
                 }
             });

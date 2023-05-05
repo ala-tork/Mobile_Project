@@ -3,6 +3,7 @@ package com.example.projet_repertoire;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,19 +29,32 @@ public class AddPerson extends AppCompatActivity {
             public void onClick(View view) {
                 //instance of the class that help me to manipulate data
                 MyDataBaseHelper db = new MyDataBaseHelper(AddPerson.this);
-                //execute the methode from that class
-                long res=db.SavePerson(
-                        name.getText().toString().trim()
-                        ,Integer.valueOf(phonenumber.getText().toString().trim()),
-                        email.getText().toString().trim(),
-                        "https://www.facebook.com/"+facebook.getText().toString().trim()
-                );
-                if(res==-1){
-                    Toast.makeText(AddPerson.this, "Failde To Save", Toast.LENGTH_SHORT).show();
-                    finish();
+                if(TextUtils.isEmpty(name.getText().toString().trim())){
+                    name.setError("name is required");
+                    name.requestFocus();
+                }else if(TextUtils.isEmpty(phonenumber.getText().toString().trim())){
+                    phonenumber.setError("Phone Number Is required");
+                    phonenumber.requestFocus();
+                } else if (!TextUtils.isDigitsOnly(phonenumber.getText().toString())) {
+                    phonenumber.setError("Phone Number should have only Digit ");
+                    phonenumber.requestFocus();
                 }else{
-                    Toast.makeText(AddPerson.this, "Sucessful Save", Toast.LENGTH_SHORT).show();
+                    //execute Save From DataBaseHelper class
+                    long res=db.SavePerson(
+                            name.getText().toString().trim()
+                            ,Integer.valueOf(phonenumber.getText().toString().trim()),
+                            email.getText().toString().trim(),
+                            "https://www.facebook.com/"+facebook.getText().toString().trim()
+                    );
+                    if(res==-1){
+                        Toast.makeText(AddPerson.this, "Failde To Save", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }else{
+                        Toast.makeText(AddPerson.this, "Sucessful Save", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
+
             }
         });
     }

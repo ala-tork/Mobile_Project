@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +59,23 @@ public class PersonDetails extends AppCompatActivity {
             }
         });
 
+        facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(facebook.getText().toString().trim()));
+                startActivity(i);
+            }
+        });
+        phoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String x=phoneNumber.getText().toString().trim();
+                choisir(x);
+            }
+        });
     }
+
+
 
     private void getDataFromIntent() {
         if(getIntent().hasExtra("id") && getIntent().hasExtra("Name") &&
@@ -104,4 +121,27 @@ public class PersonDetails extends AppCompatActivity {
         build.create().show();
 
     }
+    void choisir(String x){
+        AlertDialog.Builder b = new AlertDialog.Builder(PersonDetails.this);
+        b.setTitle("Call/SMS");
+        b.setMessage("do you wana to call or to send SMS");
+        b.setPositiveButton("Call", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                Intent makecall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+Uri.encode(x)));
+
+
+                startActivity(makecall);
+            }
+        });
+        b.setNegativeButton("SMS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(PersonDetails.this, "Send SMS", Toast.LENGTH_SHORT).show();
+            }
+        });
+        b.create().show();
+    }
+
 }
