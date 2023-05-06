@@ -1,19 +1,27 @@
 package com.example.projet_repertoire;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.InetAddresses;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class PersonDetails extends AppCompatActivity {
+    AlertDialog dialog;
     TextView name,phoneNumber,email,facebook;
     Button update,persondelete;
     String Did,Dname,Dphone,Demail,Dfacebook;
@@ -70,7 +78,8 @@ public class PersonDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String x=phoneNumber.getText().toString().trim();
-                choisir(x);
+                String n= name.getText().toString().trim();
+                choisir(x,n);
             }
         });
     }
@@ -121,10 +130,14 @@ public class PersonDetails extends AppCompatActivity {
         build.create().show();
 
     }
-    void choisir(String x){
+    //call or send a message
+
+    void choisir(String x,String n){
+
         AlertDialog.Builder b = new AlertDialog.Builder(PersonDetails.this);
+
         b.setTitle("Call/SMS");
-        b.setMessage("do you wana to call or to send SMS");
+        b.setMessage("do you wana to call or to send SMS to "+n);
         b.setPositiveButton("Call", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -138,10 +151,45 @@ public class PersonDetails extends AppCompatActivity {
         b.setNegativeButton("SMS", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(PersonDetails.this, "Send SMS", Toast.LENGTH_SHORT).show();
+                    Sms(x ,n);
             }
         });
         b.create().show();
+    }
+    public void Sms (String x,String n){
+        AlertDialog.Builder b= new AlertDialog.Builder(this);
+        //create the Customise dialog view using inflater
+        View v = getLayoutInflater().inflate(R.layout.activity_custom_dialog,null);
+        //set the new view to dialog
+        b.setView(v);
+        dialog = b.create();
+
+        EditText message;
+        TextView title;
+
+        title=v.findViewById(R.id.SmsTitle);
+        message=v.findViewById(R.id.MessageBody);
+
+        title.setText("Send Message To "+n);
+        b.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(TextUtils.isEmpty(message.getText().toString().trim())){
+                    Toast.makeText(PersonDetails.this, "Pleas type your message", Toast.LENGTH_SHORT).show();
+                }else{
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(x, null, message.getText().toString().trim(), null, null);
+                    Toast.makeText( PersonDetails.this, "send", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        b.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialog.dismiss();
+            }
+        });
+        b.show();
     }
 
 }
