@@ -131,7 +131,6 @@ public class PersonDetails extends AppCompatActivity {
 
     }
     //call or send a message
-
     void choisir(String x,String n){
 
         AlertDialog.Builder b = new AlertDialog.Builder(PersonDetails.this);
@@ -151,11 +150,13 @@ public class PersonDetails extends AppCompatActivity {
         b.setNegativeButton("SMS", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                    Sms(x ,n);
+                //function make a customise dialg to send a message
+                Sms(x ,n);
             }
         });
         b.create().show();
     }
+    // sending message with customise AlertDialog
     public void Sms (String x,String n){
         AlertDialog.Builder b= new AlertDialog.Builder(this);
         //create the Customise dialog view using inflater
@@ -179,7 +180,7 @@ public class PersonDetails extends AppCompatActivity {
                 }else{
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(x, null, message.getText().toString().trim(), null, null);
-                    Toast.makeText( PersonDetails.this, "send", Toast.LENGTH_SHORT).show();
+                    Toast.makeText( PersonDetails.this, "SMS send With succes", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -99,16 +99,6 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db =this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TableName );
     }
-    /*
-    Cursor getOnePerson(String id){
-        Cursor c = null;
-        SQLiteDatabase db =this.getReadableDatabase();
-        String q = " SELECT * FROM " + TableName + "WHERE id == "+id ;
-        if(db!=null){
-            c= db.rawQuery(q,null);
-        }
-        return  c;
 
-    }*/
 }
 
