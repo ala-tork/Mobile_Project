@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/message"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/Emailtitle"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/purple_700"
+        android:paddingTop="20dp"
+        android:scaleType="center"
+        android:text="Send Email"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/EmailObject"
+        android:layout_width="390dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="8dp"
+        android:hint="Object"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/EmailMessage"
+        android:layout_width="397dp"
+        android:layout_height="130dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Type your message ..."
+        android:inputType="textMultiLine"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/SendEmail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Send" />
+
+    <Button
+        android:id="@+id/Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:text="Cancel" />
+
+</LinearLayout>

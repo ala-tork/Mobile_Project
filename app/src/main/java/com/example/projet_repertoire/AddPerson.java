@@ -2,6 +2,7 @@ package com.example.projet_repertoire;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -39,19 +40,34 @@ public class AddPerson extends AppCompatActivity {
                     phonenumber.setError("Phone Number should have only Digit ");
                     phonenumber.requestFocus();
                 }else{
+                    long res = -1;
                     //execute Save From DataBaseHelper class
-                    long res=db.SavePerson(
-                            name.getText().toString().trim()
-                            ,Integer.valueOf(phonenumber.getText().toString().trim()),
-                            email.getText().toString().trim(),
-                            "https://www.facebook.com/"+facebook.getText().toString().trim()
-                    );
+                    if(TextUtils.isEmpty(facebook.getText().toString().trim())){
+                        res=db.SavePerson(
+                                name.getText().toString().trim()
+                                ,Integer.valueOf(phonenumber.getText().toString().trim()),
+                                email.getText().toString().trim(),
+                                facebook.getText().toString().trim()
+                        );
+                    }else{
+
+                        res=db.SavePerson(
+                                name.getText().toString().trim()
+                                ,Integer.valueOf(phonenumber.getText().toString().trim()),
+                                email.getText().toString().trim(),
+                                "https://www.facebook.com/"+facebook.getText().toString().trim()
+                        );
+                    }
+
                     if(res==-1){
                         Toast.makeText(AddPerson.this, "Failde To Save", Toast.LENGTH_SHORT).show();
                         finish();
                     }else{
                         Toast.makeText(AddPerson.this, "Sucessful Save", Toast.LENGTH_SHORT).show();
-                        finish();
+                        //finish();
+                        Intent i = new Intent(AddPerson.this,MainActivity.class);
+                        startActivity(i);
+
                     }
                 }
 

@@ -82,6 +82,14 @@ public class PersonDetails extends AppCompatActivity {
                 choisir(x,n);
             }
         });
+
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String mail=email.getText().toString().trim();
+                SendEmail(mail);
+            }
+        });
     }
 
 
@@ -191,6 +199,44 @@ public class PersonDetails extends AppCompatActivity {
             }
         });
         b.show();
+    }
+
+
+    public void SendEmail(String mail){
+        AlertDialog.Builder b= new AlertDialog.Builder(this);
+        //create the Customise dialog view using inflater
+        View v = getLayoutInflater().inflate(R.layout.email_dialog,null);
+        //set the new view to dialog
+        b.setView(v);
+        dialog = b.create();
+
+        EditText EmailObject,EmailMessage;
+        Button Cancel,SendEmail;
+
+        EmailObject=v.findViewById(R.id.EmailObject);
+        EmailMessage=v.findViewById(R.id.EmailMessage);
+        Cancel= v.findViewById(R.id.Cancel);
+        SendEmail=v.findViewById(R.id.SendEmail);
+
+        String Objet=EmailObject.getText().toString().trim();
+        String Message=SendEmail.getText().toString().trim();
+        b.show();
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        SendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW,Uri.parse("mailto:"+mail));
+                i.putExtra(Intent.EXTRA_SUBJECT,Objet);
+                i.putExtra(Intent.EXTRA_TEXT,Message);
+                startActivity(i);
+                finish();
+            }
+        });
     }
 
 }
