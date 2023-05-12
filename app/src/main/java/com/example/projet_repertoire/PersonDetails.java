@@ -223,7 +223,8 @@ public class PersonDetails extends AppCompatActivity {
         b.show();
         Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view ) {
+
                 finish();
             }
         });

@@ -111,13 +111,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.DeleteAll){
-            confirmDialog();
+            confirmDialogForDelete();
+        }else{
+            Intent i = new Intent(MainActivity.this,Login.class);
+            startActivity(i);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
+
     // confrim dialog to delte all Persons
-    void confirmDialog(){
+    void confirmDialogForDelete(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete All?");
         builder.setMessage("Are you sure you want to delete all Persons?");

@@ -22,6 +22,8 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     private final static String Column_PhoneNumber ="phone_number";
     private final static String Column_Email="email";
     private final static String Column_Facebook="facebook";
+    private final static String Column_IDUSER="user_id";
+
 
 
     public MyDataBaseHelper(@Nullable Context context) {
@@ -36,7 +38,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         String query=
                 "CREATE TABLE " + TableName +
                         " ( " + Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        Column_Name + " TEXT, " +
+                        Column_Name + " TEXT , " +
                         Column_PhoneNumber + " INTEGER ," +
                         Column_Email + " TEXT ," +
                          Column_Facebook + " TEXT );";
