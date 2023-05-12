@@ -47,10 +47,11 @@ public class Register extends AppCompatActivity {
 //        progressBar.setVisibility(View.INVISIBLE);
 
         // get all users from the database
+        /*
         List<User> userList = db.getAllUsers();
         for (User user : userList) {
             Toast.makeText(this, user.getName() + "   " + user.getId(), Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,10 +61,10 @@ public class Register extends AppCompatActivity {
                     email.setError("Email is required");
                     email.requestFocus();
                 }//verifier si l'email et valide ou nn
-                /*else if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
+                else if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
                     email.setError("Valid Email is required");
                     email.requestFocus();
-                } */else if (TextUtils.isEmpty(email.getText().toString().trim())) {
+                } else if (TextUtils.isEmpty(email.getText().toString().trim())) {
                     username.setError("User Name is required");
                     username.requestFocus();
                 } else if (TextUtils.isEmpty(password.getText().toString().trim())) {
@@ -85,6 +86,14 @@ public class Register extends AppCompatActivity {
                 }
             }
 
+        });
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Register.this,Login.class);
+                startActivity(i);
+                finish();
+            }
         });
         /*pass.setOnClickListener(new View.OnClickListener() {
             @Override

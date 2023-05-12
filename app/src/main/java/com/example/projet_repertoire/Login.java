@@ -34,9 +34,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(Login.this, username.getText().toString(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(Login.this, password.getText().toString(), Toast.LENGTH_SHORT).show();
-
                     user= db.VerifUser(username.getText().toString(),password.getText().toString());
                     if (user==null){
                         Toast.makeText(Login.this, "Ther is no user with this name ", Toast.LENGTH_SHORT).show();

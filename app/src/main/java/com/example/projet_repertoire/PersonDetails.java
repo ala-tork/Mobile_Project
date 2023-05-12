@@ -150,8 +150,6 @@ public class PersonDetails extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 Intent makecall = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+Uri.encode(x)));
-
-
                 startActivity(makecall);
             }
         });
@@ -219,7 +217,7 @@ public class PersonDetails extends AppCompatActivity {
         SendEmail=v.findViewById(R.id.SendEmail);
 
         String Objet=EmailObject.getText().toString().trim();
-        String Message=SendEmail.getText().toString().trim();
+        String Message=EmailMessage.getText().toString().trim();
         b.show();
         Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
